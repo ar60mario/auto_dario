@@ -451,6 +451,7 @@ public class FacturarFrame extends javax.swing.JFrame {
             return;
         }
         int maxNro = cf.getOrderMaximo();
+        Double importeMaximoFactura = cf.getImporteMaximo();
         List<ProductoTop> productosTop = null;
         try {
             if (variosRb.isSelected()) {
@@ -478,14 +479,27 @@ public class FacturarFrame extends javax.swing.JFrame {
                     Logger.getLogger(FacturarFrame.class.getName()).log(Level.SEVERE, null, ex);
                     continue;
                 }
+                Double precio = p.getPrecio();
+                Float impuesto = p.getImpuesto();
+                String detalleProducto = p.getDetalle();
                 pt.setStock(p.getStock());
                 pt.setDetalle(p.getDetalle());
-                pt.setPrecio(p.getPrecio());
-                pt.setImpuesto(p.getImpuesto());
-//                Float r = p.getStock();
-//                if (r > 0) {
-//                    ft += r;
-//                }
+                pt.setPrecio(precio);
+                pt.setImpuesto(impuesto);
+                Double iva21 = precio * pIva/100;
+                Double bruto = precio + iva21;
+                Double total = bruto + impuesto;
+                Integer cantidadVenta = pt.getCantidad();
+                Double totalVenta = total * cantidadVenta;
+                if (totalVenta > importeMaximoFactura){
+                    System.out.println(totalVenta);
+                    System.out.println(importeMaximoFactura);
+                    System.out.println(detalleProducto);
+                    System.out.println(p.getCodigo());
+                    System.out.println(pt.getCodigo());
+                    JOptionPane.showMessageDialog(this, "PRODUCTO SUPERA LA VENTA: " + detalleProducto);
+                    return;
+                }
                 try {
                     new ProductoTopService().updateProductoTop(pt);
                 } catch (Exception ex) {

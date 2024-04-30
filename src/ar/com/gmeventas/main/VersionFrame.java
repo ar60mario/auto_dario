@@ -18,7 +18,7 @@ public class VersionFrame extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(100, 100, 255));
         this.setLocationRelativeTo(null);
-        versionTxt.setText("2024-ABRIL-029_a");
+        versionTxt.setText("2024-ABRIL-030_a");
         versionTxt.setEditable(false);
     }
 

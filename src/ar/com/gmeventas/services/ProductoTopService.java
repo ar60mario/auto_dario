@@ -61,6 +61,20 @@ public class ProductoTopService {
         return productos;
     }
     
+    public List<ProductoTop> getAllProductoTopActivosByFiltro(String filtro) throws Exception {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        List<ProductoTop> productos = null;
+        try{
+            productos = new ProductoTopBO().getAllProductoTopActivosByFiltro(filtro);
+            tx.commit();
+        } catch (Exception ex) {
+            tx.rollback();
+            throw new Exception(ex);
+        }
+        return productos;
+    }
+    
      public List<ProductoTop> getAllProductoTopInactivos() throws Exception {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();

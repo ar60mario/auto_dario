@@ -6,6 +6,7 @@
 package ar.com.gmeventas.main;
 
 import ar.com.gmeventas.entities.Factura;
+import ar.com.gmeventas.entities.ProductoTop;
 import ar.com.gmeventas.entities.RenglonFc;
 import ar.com.gmeventas.frame.AbmClienteFrame;
 import ar.com.gmeventas.frame.AbmProductoFrame;
@@ -521,9 +522,11 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void facturar() {
-        FacturarFrame ff = new FacturarFrame();
-        ff.setVisible(true);
-        this.dispose();
+//        if (verificar()) {
+            FacturarFrame ff = new FacturarFrame();
+            ff.setVisible(true);
+            this.dispose();
+//        }
     }
 
     private void facturaWebUnica() {
@@ -687,4 +690,11 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }
+
+//    private boolean verificar() {
+//        Boolean mayorAlTopeDeVenta = false;
+//        List<ProductoTop> productos;
+//        
+//        return mayorAlTopeDeVenta;
+//    }
 }

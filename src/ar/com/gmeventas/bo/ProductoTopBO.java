@@ -67,6 +67,16 @@ public class ProductoTopBO {
         return productos;
     }
 
+    public List<ProductoTop> getAllProductoTopActivosByFiltro(String filtro) throws Exception {
+        List<ProductoTop> productos = null;
+        try {
+            productos = dao.getAllProductoTopActivosByFiltro(filtro);
+        } catch (HibernateException ex) {
+            throw new Exception(ex);
+        }
+        return productos;
+    }
+    
     public List<ProductoTop> getAllProductoTopInactivos() throws Exception {
         List<ProductoTop> productos = null;
         try {

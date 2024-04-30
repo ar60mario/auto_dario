@@ -18,8 +18,8 @@ import org.hibernate.criterion.Restrictions;
  * @author Mario
  */
 public class ProductoTopDAO extends GenericDAO {
-    
-    public List<ProductoTop> getAllProductoVariosTopActivos(Rubro rubro){
+
+    public List<ProductoTop> getAllProductoVariosTopActivos(Rubro rubro) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(ProductoTop.class);
         criteria.add(Restrictions.eq("activo", true));
@@ -28,8 +28,8 @@ public class ProductoTopDAO extends GenericDAO {
         List<ProductoTop> productos = criteria.list();
         return productos;
     }
-    
-    public List<ProductoTop> getAllProductoTabacoTopActivos2(Rubro rubro){
+
+    public List<ProductoTop> getAllProductoTabacoTopActivos2(Rubro rubro) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(ProductoTop.class);
         criteria.add(Restrictions.eq("activo", true));
@@ -39,8 +39,8 @@ public class ProductoTopDAO extends GenericDAO {
         List<ProductoTop> productos = criteria.list();
         return productos;
     }
-    
-    public List<ProductoTop> getAllProductoTopActivos(){
+
+    public List<ProductoTop> getAllProductoTopActivos() {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(ProductoTop.class);
         criteria.add(Restrictions.eq("activo", true));
@@ -49,8 +49,19 @@ public class ProductoTopDAO extends GenericDAO {
         productos = criteria.list();
         return productos;
     }
-    
-    public List<ProductoTop> getAllProductoTopInactivos(){
+
+    public List<ProductoTop> getAllProductoTopActivosByFiltro(String filtro) {
+        Session session = HibernateUtils.getSessionFactory().getCurrentSession();
+        Criteria criteria = session.createCriteria(ProductoTop.class);
+        criteria.add(Restrictions.eq("activo", true));
+        criteria.add(Restrictions.eq("panificado", false));
+        criteria.add(Restrictions.like("detalle", "%" + filtro + "%"));
+        List<ProductoTop> productos = null;
+        productos = criteria.list();
+        return productos;
+    }
+
+    public List<ProductoTop> getAllProductoTopInactivos() {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(ProductoTop.class);
         criteria.add(Restrictions.eq("activo", false));
@@ -58,16 +69,16 @@ public class ProductoTopDAO extends GenericDAO {
         productos = criteria.list();
         return productos;
     }
-    
-    public ProductoTop getProductoTopByCodigo(Integer codigo){
+
+    public ProductoTop getProductoTopByCodigo(Integer codigo) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(ProductoTop.class);
         criteria.add(Restrictions.eq("codigo", codigo));
         ProductoTop prod = (ProductoTop) criteria.uniqueResult();
         return prod;
     }
-    
-    public ProductoTop getProductoTopByOrder(Integer order){
+
+    public ProductoTop getProductoTopByOrder(Integer order) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(ProductoTop.class);
         criteria.add(Restrictions.eq("activo", true));
@@ -86,8 +97,8 @@ public class ProductoTopDAO extends GenericDAO {
 //        }
         return prod;
     }
-    
-    public ProductoTop getProductoTopPanificadoByOrder(Integer order){
+
+    public ProductoTop getProductoTopPanificadoByOrder(Integer order) {
         Session session = HibernateUtils.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(ProductoTop.class);
         criteria.add(Restrictions.eq("activo", true));
@@ -137,5 +148,5 @@ public class ProductoTopDAO extends GenericDAO {
                 
         return clientes;
     }
-    */
+     */
 }
